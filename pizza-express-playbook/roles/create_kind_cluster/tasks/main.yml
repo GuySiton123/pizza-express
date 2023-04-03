@@ -1,0 +1,10 @@
+---
+# tasks file for create_kind_cluster
+- name: Create kind cluster
+  include_tasks: create_kind_cluster.yaml
+
+- name: Build pizza-express test image
+  include_tasks: build_test_image.yaml
+
+- name: Load the test image to the kind cluster
+  include_tasks: load_image_to_cluster.yaml

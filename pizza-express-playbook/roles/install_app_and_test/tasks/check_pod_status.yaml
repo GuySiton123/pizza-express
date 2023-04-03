@@ -1,0 +1,9 @@
+- name: Check if last created pod is in running state
+  shell: kubectl get pod -l app=node --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1].status.phase}'
+  register: pod_status
+
+- name: Fail the job if the pod is not in running state
+  assert:
+    that:
+      - pod_status.stdout == "Running"
+    fail_msg: "The created pod is not in running state please check this issue"

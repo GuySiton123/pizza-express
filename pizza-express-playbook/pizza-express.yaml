@@ -1,0 +1,19 @@
+---
+- name: pizee-express application build test and deploy
+  hosts: localhost
+  become: yes
+  vars:
+    kind_cluster_name: test-cluster
+    image_name: pizza-express
+  tasks:
+    - name: Install kind and other dependencies
+      include_role:
+        name: install_kind_and_dependencies
+
+    - name: Create the kind cluster
+      include_role:
+        name: create_kind_cluster
+
+    - name: Install the pizza-express app, run tests and validate
+      include_role:
+        name: install_app_and_test 

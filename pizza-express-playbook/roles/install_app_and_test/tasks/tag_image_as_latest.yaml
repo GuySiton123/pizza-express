@@ -1,0 +1,3 @@
+- name: Tag image with latest tag
+  shell: "docker tag {{ image_name }}:test {{ image_name }}:latest"
+  when: unit_test_output.rc == 0 and http_check_output.stdout == "200"

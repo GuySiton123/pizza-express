@@ -1,0 +1,25 @@
+Deployment:
+  name: pizza-express-deployment
+  app: node
+  replicas: 1
+  containers:
+    app:
+      name: pizza-express
+      image: pizza-express
+      tag: test
+      ports:
+        containerPort: 3000 
+    db:
+      name: redis
+      image: redis
+      tag: 6.2.7
+      ports:
+        containerPort: 6379
+
+Service:
+  name: pizza-express-service
+  ports:
+    name: http
+    port: 3000
+    targetPort: 3000
+    nodePort: 32081

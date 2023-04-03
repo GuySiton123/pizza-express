@@ -1,0 +1,2 @@
+- name: Load the built image to the kind cluster
+  shell: "kind load docker-image {{ image_name }}:test --name {{ kind_cluster_name }}" 

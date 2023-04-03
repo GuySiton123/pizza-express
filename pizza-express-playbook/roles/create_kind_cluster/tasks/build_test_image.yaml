@@ -1,0 +1,2 @@
+- name: Build the pizza-express test image
+  shell: "docker build -t {{ image_name }}:test ../pizza-express-app/."

@@ -1,0 +1,9 @@
+- name: Run unit tests on the node.js container
+  shell: "kubectl exec deployment/pizza-express-deployment -c pizza-express -- npm test > /dev/null 2>&1"
+  register: unit_test_output
+
+- name: Run http check on the service
+  args:
+    warn: false
+  shell: "curl -s -o /dev/null -w \"%{http_code}\" http://`kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type==\"InternalIP\")].address}'`:32081"
+  register: http_check_output

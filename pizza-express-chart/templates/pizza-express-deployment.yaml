@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.Deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.Deployment.app }}
+  replicas: {{ .Values.Deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.Deployment.app }}
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+    spec:
+      containers:
+        - name: {{ .Values.Deployment.containers.app.name }}
+          image: {{ .Values.Deployment.containers.app.image }}:{{ .Values.Deployment.containers.app.tag }} 
+          ports:
+            - containerPort: {{ .Values.Deployment.containers.app.ports.containerPort }}
+        - name: {{ .Values.Deployment.containers.db.name }}
+          image: {{ .Values.Deployment.containers.db.image }}:{{ .Values.Deployment.containers.db.tag }}
+          ports:
+            - containerPort: {{ .Values.Deployment.containers.db.ports.containerPort }}

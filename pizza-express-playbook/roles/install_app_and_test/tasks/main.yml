@@ -1,0 +1,13 @@
+---
+# tasks file for install_app_and_test
+- name: Install the helm chart
+  include_tasks: install_chart.yaml
+
+- name: Check the last created pod status
+  include_tasks: check_pod_status.yaml
+
+- name: Run tests on the app
+  include_tasks: run_tests.yaml
+
+- name: Tag image with latest tag
+  include_tasks: tag_image_as_latest.yaml
